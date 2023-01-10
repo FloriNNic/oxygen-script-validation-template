@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script xmlns="http://www.oxygenxml.com/ns/framework/extend"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.oxygenxml.com/ns/framework/extend http://www.oxygenxml.com/ns/framework/extend/frameworkExtensionScript.xsd"
+  base="DITA">
+  <name>DITA Q/A</name>
+  <description>DITA Questions and Answers Topic</description>
+  <priority>Normal</priority>
+  
+  <associationRules inherit="none">
+    <addRule rootElementLocalName="qatopic"/>
+  </associationRules>
+  
+  <documentTemplates inherit="none">
+    <addEntry path="${frameworkDir}/templates/qatopic"/>
+  </documentTemplates>
+  
+  <author>
+    <!-- Add new toolbar action -->
+    <toolbars>
+      <toolbar>
+        <addAction id="insert.qagroup" position="after" anchor="insert.media"/>
+      </toolbar>
+    </toolbars>
+    
+    <!-- Add new content completion action -->
+    <contentCompletion>
+      <authorActions>
+        <addAction id="insert.qagroup" replacedElement="qagroup" inCCWindow="true" alias="qagroup"/> 
+      </authorActions>
+    </contentCompletion>
+    
+    <menu name="DITA Q/A">
+      <addAction id="insert.qagroup" position="before"/>
+      <separator position="before"/>
+    </menu>
+    <authorActions>
+      <removeAction id="section"/>
+      <removeAction id="insert.topic"/>
+      <removeAction id="insert.concept"/>
+      <removeAction id="insert.task"/>
+      <removeAction id="insert.reference"/>
+      <removeAction id="insert.intent.question"/>
+    </authorActions>
+  </author>
+  
+  
+</script>

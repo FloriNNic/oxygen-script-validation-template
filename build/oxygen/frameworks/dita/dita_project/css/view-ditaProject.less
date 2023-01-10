@@ -1,0 +1,266 @@
+// Styling for DITA Project files
+@namespace oxy url('http://www.oxygenxml.com/extensions/author');
+@namespace dp url('https://www.dita-ot.org/project');
+
+@import "../../lw/css/library.less";
+
+.DITAProject() {
+  & {
+    font-family:arial, helvetica, sans-serif;
+    display:block;
+    margin: 0.5em;
+  }
+  & > * {
+    margin-bottom:0.5em;
+    padding-left:0.2em;
+    border-left:3px solid #EEEEEE;
+    
+    padding-bottom:0.2em;
+    border-bottom:1px solid #EEEEEE;
+  }
+  &:before(100){
+    text-align:left;
+    content:"DITA Project file";
+    .color(blue);
+    font-weight:bold;
+    font-size:larger;    
+  }
+  &:before {
+      vertical-align: middle;
+      content: 
+        oxy_button(
+            action, oxy_action(
+                        name, '${i18n(Publish_all_deliverables)}', 
+                        icon, url('/images/ApplyStyleSheet16.png'), 
+                        operation, 'ExecuteCustomizableTransformationScenarioOperation', 
+                        arg-scenarioName, 'Publish DITA-OT Project (all deliverables)', 
+                        arg-markOthersInProgressXPathLocation, '//*'), 
+            showIcon, true, 
+            transparent, true, 
+            enableInReadOnlyContext, true);
+  }
+  &:-oxy-transformation-in-progress:before {
+       vertical-align: middle;
+       content: oxy_button(
+                action, oxy_action(
+                        name, oxy_concat('${i18n(Transformation_in_progress)}', '...'), 
+                        description, '${i18n(Stop_transformation_tooltip)}',
+                        icon, url('/images/Stop16.png'), 
+                        operation, 'StopCurrentTransformationScenarioOperation'), 
+                showText, true,
+                showIcon, true, 
+                transparent, true, 
+                enableInReadOnlyContext, true); 
+  }
+  &:-oxy-transformation-in-progress-others:before {
+    content: "";
+  }
+}
+
+.displayElement(@label:oxy_local-name()) {
+  &{
+    display:block;
+    margin-left:1em;
+  }
+  &:before(100) {
+    content: oxy_label(text, oxy_concat(@label, " "), width, 5.5em, color, inherit) 
+    oxy_label(text, ":   ", color, gray) ;
+  }
+}
+
+
+.link(@ref:href, @prefix:"") {
+  &[@{ref}]:before(5) {
+    content: url("../../img/link.png") oxy_concat(@prefix, attr(@ref));
+    link: oxy_concat(@prefix, attr(@ref));
+    .color(navy);
+  }
+  &[@{ref}]:before(5):hover,
+  &[@{ref}]:before(5):focus{
+    text-decoration:underline;
+    link: oxy_concat(@prefix, attr(@ref));
+  }
+}
+
+.name() {
+  &[name]:before(10) {
+    font-weight:bold;
+    .color(black);
+    content:attr(name) " ";
+  }
+}
+
+.path() {
+  &[path]:before(4) {
+    .background-color(#EEEEEE);
+    content:" " attr(path) " ";
+  }
+}
+
+.value() {
+  &[value]:before(3) {
+    content:attr(value) " ";
+  }
+}
+
+.id() {
+  &[id]:before(5) {
+    content:"[" attr(id) "]";
+    .color(gray);
+    
+  }
+}
+
+.idref() {
+  &[idref]{
+    .link(idref, "#");
+  }
+}
+
+.transtype() {
+  &[transtype]:before(3) {
+    content:" transform to " ;
+  }
+  &[transtype]:before(2) {
+    .color(blue);
+    content: oxy_label(text, attr(transtype)) " ";
+  }
+}
+
+.foldable() {
+     -oxy-foldable: true;
+}
+
+/*  ----------------------------  */
+
+dp|project {
+  .color(black);
+  .DITAProject();
+}
+
+/*EXM-50604 - hide DITA Project file label in included projects*/
+dp|project dp|project:before, dp|project dp|project:before(100){
+  display: none;
+}
+
+dp|include {
+  .color(maroon);
+  .displayElement();
+  .link(href);
+  .foldable();
+}
+
+
+dp|deliverable {
+  .color(blue);
+   .displayElement();
+  .name();
+  .id();
+  
+  &[name][id]:before(1) {
+  content: oxy_button(
+         action, oxy_action(
+          name, oxy_concat('${i18n(Publish)}', ' ', '"',  attr(name), '"'), 
+          icon, url('/images/ApplyStyleSheet16.png'),
+          operation, 'ro.sync.ecss.extensions.commons.operations.ExecuteCustomizableTransformationScenarioOperation',
+          arg-scenarioName, 'Publish DITA-OT Project (select deliverable)',
+          arg-scenarioParameters, oxy_concat('deliverable.id=', attr(id)),
+          arg-markOthersInProgressXPathLocation, '//*'),
+          showIcon, true,
+          transparent, true,
+          enableInReadOnlyContext, true
+        );
+  }
+  
+    &[name][id]:-oxy-transformation-in-progress:before(1){
+      content:oxy_button(action, oxy_action(name, oxy_concat('${i18n(Transformation_in_progress)}', '...'), 
+                                            description, '${i18n(Stop_transformation_tooltip)}',
+                                            icon, url('/images/Stop16.png')
+                                            operation, 'ro.sync.ecss.extensions.commons.operations.StopCurrentTransformationScenarioOperation'
+                                            ),
+          showText, true,
+          showIcon, true,
+          transparent, true,
+          enableInReadOnlyContext, true);
+    }
+    &[name][id]:-oxy-transformation-in-progress-others:before(1){
+        content:"";
+    }
+}
+
+dp|publication:not([idref]) {
+    .color(purple);
+    .displayElement();
+    .name();
+    .id();
+    .transtype();
+}
+
+dp|publication[idref] {
+    .color(purple);
+    .displayElement();
+    .idref();
+}
+
+
+
+
+dp|context:not([idref]) {
+  .color(green);
+  .displayElement();
+  .name();
+  .id();
+}
+
+dp|context[idref] {
+  .color(green);
+  .displayElement();
+  .idref();
+}
+
+
+
+dp|input {
+  .displayElement();
+  .link(href);
+}
+
+
+
+dp|profile {
+  .displayElement();
+}
+
+dp|ditaval {
+  .link(href);  
+}
+
+dp|output {
+  .displayElement();
+  .link(href);
+}
+
+dp|param {
+  display:block;
+  margin-left:1em;
+  .color(brown);
+  &[name]:before(10) {
+    //font-weight:bold;
+    .color(black);
+    content:oxy_label(text, oxy_concat(attr(name), " "), width, 4em, color, inherit)
+  }
+  &:before(9) {
+    .color(gray);
+    content:" =    ";
+  }
+  .link(href);
+  .path();
+  .value();
+}
+
+
+
+
+
+
+

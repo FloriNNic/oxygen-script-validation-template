@@ -1,0 +1,9 @@
+<outline> 
+  <tocMode editable="yes" default="yes">
+    <elements names="topicref section topichead reltable chapter mapref"/>
+    <titleLocator element="topicref" location="@navtitle,before(1030),.//title,@href"/>
+    <titleLocator element="chapter" location="@navtitle,before(1030),@href"/>
+    <titleLocator element="mapref" location="@navtitle,before(1030),@href"/>
+    <titleLocator element="topichead" location="@navtitle"/>
+  </tocMode>
+</outline>
