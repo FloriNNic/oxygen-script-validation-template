@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Results of the test scenario schema",
+    "description": "The schema contains the results of the tests.",
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+        "^test[A-Z]+[a-zA-Z0-9]+$": {
+            "description": "The result of the test.",
+            "type": "object",
+            "properties": {
+                "result": {
+                    "description": "The result of the test.",
+                    "type": "object",
+                    "properties":{
+                        "passed": {
+                            "type": "boolean"
+                        },
+                        "info": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["passed"]
+                },
+                "response": {
+                    "description": "The response of the request.",
+                    "type": "object",
+                    "properties": {
+                        "status": {"type": "string"},
+                        "responseText": {"type": "string"}
+                    }
+                },
+                "expectedResponse": {
+                    "description": "The expected response.",
+                    "type": "object",
+                    "properties": {
+                        "expectedStatus": {"type": "string"},
+                        "expectedResponseText": {"type": "string"}
+                    }
+                }
+            },
+            "required": ["result"]
+        }
+    },
+    "minProperties": 1
+    
+}

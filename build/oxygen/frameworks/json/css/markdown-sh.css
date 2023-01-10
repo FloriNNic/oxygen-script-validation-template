@@ -1,0 +1,16 @@
+description:before {
+  content: "Description:"
+}
+description {
+    visibility: -oxy-collapse-text;
+    white-space: pre-wrap;
+    font-weight: normal;
+    padding-bottom: 1em;
+    
+    content: oxy_textArea(
+      edit, '#content',
+      fontInherit, 'true',
+      rows, 5,
+      width, 100%,
+      contentType, 'text/markdown');
+}

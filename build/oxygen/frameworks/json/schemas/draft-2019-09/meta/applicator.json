@@ -1,0 +1,96 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://json-schema.org/draft/2019-09/meta/applicator",
+    "$vocabulary": {"https://json-schema.org/draft/2019-09/vocab/applicator": true},
+    "title": "Applicator vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "additionalItems": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of &quot;additionalItems&quot; MUST be a valid JSON Schema.\n\nThe behavior of this keyword depends on the presence and annotation result of &quot;items&quot; within the same schema object. If &quot;items&quot; is present, and its annotation result is a number, validation succeeds if every instance element at an index greater than that number validates against &quot;additionalItems&quot;.\n\nOtherwise, if &quot;items&quot; is absent or its annotation result is the boolean true, &quot;additionalItems&quot; MUST be ignored.\n\nIf the &quot;additionalItems&quot; subschema is applied to any positions within the instance array, it produces an annotation result of boolean true, analogous to the single schema behavior of &quot;items&quot;. If any &quot;additionalItems&quot; keyword from any subschema applied to the same instance location produces an annotation value of true, then the combined result from these keywords is also true.\n\nOmitting this keyword has the same assertion behavior as an empty schema.\n\nImplementations MAY choose to implement or optimize this keyword in another way that produces the same effect, such as by directly checking for the presence and size of an &quot;items&quot; array.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#additionalItems\">JSON Schema Specification</a></div></body></html>"
+        },
+        "unevaluatedItems": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of &quot;unevaluatedItems&quot; MUST be a valid JSON Schema.\n\nThe behavior of this keyword depends on the annotation results of adjacent keywords that apply to the instance location being validated. Specifically, the annotations from &quot;items&quot; and &quot;additionalItems&quot;, which can come from those keywords when they are adjacent to the &quot;unevaluatedItems&quot; keyword. Those two annotations, as well as &quot;unevaluatedItems&quot;, can also result from any and all adjacent in-place applicator keywords. This includes but is not limited to the in-place applicators defined in this document.\n\nIf an &quot;items&quot; annotation is present, and its annotation result is a number, and no &quot;additionalItems&quot; or &quot;unevaluatedItems&quot; annotation is present, then validation succeeds if every instance element at an index greater than the &quot;items&quot; annotation validates against &quot;unevaluatedItems&quot;.\n\nOtherwise, if any &quot;items&quot;, &quot;additionalItems&quot;, or &quot;unevaluatedItems&quot; annotations are present with a value of boolean true, then &quot;unevaluatedItems&quot; MUST be ignored. However, if none of these annotations are present, &quot;unevaluatedItems&quot; MUST be applied to all locations in the array.\n\nThis means that &quot;items&quot;, &quot;additionalItems&quot;, and all in-place applicators MUST be evaluated before this keyword can be evaluated. Authors of extension keywords MUST NOT define an in-place applicator that would need to be evaluated before this keyword.\n\nIf the &quot;unevaluatedItems&quot; subschema is applied to any positions within the instance array, it produces an annotation result of boolean true, analogous to the single schema behavior of &quot;items&quot;. If any &quot;unevaluatedItems&quot; keyword from any subschema applied to the same instance location produces an annotation value of true, then the combined result from these keywords is also true.\n\nOmitting this keyword has the same assertion behavior as an empty schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#unevaluatedItems\">JSON Schema Specification</a></div></body></html>"
+        },
+        "items": {
+            "anyOf": [
+                {"$ref": "https://json-schema.org/draft/2019-09/schema"},
+                {"$ref": "#/$defs/schemaArray"}
+            ],
+            "description": "<html><body><div>The value of &quot;items&quot; MUST be either a valid JSON Schema or an array of valid JSON Schemas.\n\nIf &quot;items&quot; is a schema, validation succeeds if all elements in the array successfully validate against that schema.\n\nIf &quot;items&quot; is an array of schemas, validation succeeds if each element of the instance validates against the schema at the same position, if any.\n\nThis keyword produces an annotation value which is the largest index to which this keyword applied a subschema. The value MAY be a boolean true if a subschema was applied to every index of the instance, such as when &quot;items&quot; is a schema.\n\nAnnotation results for &quot;items&quot; keywords from multiple schemas applied to the same instance location are combined by setting the combined result to true if any of the values are true, and otherwise retaining the largest numerical value.\n\nOmitting this keyword has the same assertion behavior as an empty schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#items\">JSON Schema Specification</a></div></body></html>"
+        },
+        "contains": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of this keyword MUST be a valid JSON Schema.\n\nAn array instance is valid against &quot;contains&quot; if at least one of its elements is valid against the given schema. Note that when collecting annotations, the subschema MUST be applied to every array element even after the first match has been found. This is to ensure that all possible annotations are collected.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#contains\">JSON Schema Specification</a></div></body></html>"
+        },
+        "additionalProperties": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of &quot;additionalProperties&quot; MUST be a valid JSON Schema.\n\nThe behavior of this keyword depends on the presence and annotation results of &quot;properties&quot; and &quot;patternProperties&quot; within the same schema object. Validation with &quot;additionalProperties&quot; applies only to the child values of instance names that do not appear in the annotation results of either &quot;properties&quot; or &quot;patternProperties&quot;.\n\nFor all such properties, validation succeeds if the child instance validates against the &quot;additionalProperties&quot; schema.\n\nThe annotation result of this keyword is the set of instance property names validated by this keyword's subschema. Annotation results for &quot;additionalProperties&quot; keywords from multiple schemas applied to the same instance location are combined by taking the union of the sets.\n\nOmitting this keyword has the same assertion behavior as an empty schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#additionalProperties\">JSON Schema Specification</a></div></body></html>"
+        },
+        "unevaluatedProperties": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of &quot;unevaluatedProperties&quot; MUST be a valid JSON Schema.\n\nThe behavior of this keyword depends on the annotation results of adjacent keywords that apply to the instance location being validated. Specifically, the annotations from &quot;properties&quot;, &quot;patternProperties&quot;, and &quot;additionalProperties&quot;, which can come from those keywords when they are adjacent to the &quot;unevaluatedProperties&quot; keyword. Those three annotations, as well as &quot;unevaluatedProperties&quot;, can also result from any and all adjacent in-place applicator keywords. This includes but is not limited to the in-place applicators defined in this document.\n\nValidation with &quot;unevaluatedProperties&quot; applies only to the child values of instance names that do not appear in the &quot;properties&quot;, &quot;patternProperties&quot;, &quot;additionalProperties&quot;, or &quot;unevaluatedProperties&quot; annotation results that apply to the instance location being validated.\n\nFor all such properties, validation succeeds if the child instance validates against the &quot;unevaluatedProperties&quot; schema.\n\nThis means that &quot;properties&quot;, &quot;patternProperties&quot;, &quot;additionalProperties&quot;, and all in-place applicators MUST be evaluated before this keyword can be evaluated. Authors of extension keywords MUST NOT define an in-place applicator that would need to be evaluated before this keyword.\n\nThe annotation result of this keyword is the set of instance property names validated by this keyword's subschema. Annotation results for &quot;unevaluatedProperties&quot; keywords from multiple schemas applied to the same instance location are combined by taking the union of the sets.\n\nOmitting this keyword has the same assertion behavior as an empty schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#unevaluatedProperties\">JSON Schema Specification</a></div></body></html>"
+        },
+        "properties": {
+            "type": "object",
+            "additionalProperties": {"$ref": "https://json-schema.org/draft/2019-09/schema"},
+            "default": {},
+            "description": "<html><body><div>The value of &quot;properties&quot; MUST be an object. Each value of this object MUST be a valid JSON Schema.\n\nValidation succeeds if, for each name that appears in both the instance and as a name within this keyword's value, the child instance for that name successfully validates against the corresponding schema.\n\nThe annotation result of this keyword is the set of instance property names matched by this keyword. Annotation results for &quot;properties&quot; keywords from multiple schemas applied to the same instance location are combined by taking the union of the sets.\n\nOmitting this keyword has the same assertion behavior as an empty object.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3.2.1\">JSON Schema Specification</a></div></body></html>"
+        },
+        "patternProperties": {
+            "type": "object",
+            "additionalProperties": {"$ref": "https://json-schema.org/draft/2019-09/schema"},
+            "propertyNames": {"format": "regex"},
+            "default": {},
+            "description": "<html><body><div>The value of &quot;patternProperties&quot; MUST be an object. Each property name of this object SHOULD be a valid regular expression, according to the ECMA 262 regular expression dialect. Each property value of this object MUST be a valid JSON Schema.\n\nValidation succeeds if, for each instance name that matches any regular expressions that appear as a property name in this keyword's value, the child instance for that name successfully validates against each schema that corresponds to a matching regular expression.\n\nThe annotation result of this keyword is the set of instance property names matched by this keyword. Annotation results for &quot;patternProperties&quot; keywords from multiple schemas applied to the same instance location are combined by taking the union of the sets.\n\nOmitting this keyword has the same assertion behavior as an empty object.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3.2.2\">JSON Schema Specification</a></div></body></html>"
+        },
+        "dependentSchemas": {
+            "type": "object",
+            "additionalProperties": {"$ref": "https://json-schema.org/draft/2019-09/schema"},
+            "description": "<html><body><div>This keyword specifies subschemas that are evaluated if the instance is an object and contains a certain property.\n\nThis keyword's value MUST be an object. Each value in the object MUST be a valid JSON Schema.\n\nIf the object key is a property in the instance, the entire instance must validate against the subschema. Its use is dependent on the presence of the property.\n\nOmitting this keyword has the same behavior as an empty object.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.2.4\">JSON Schema Specification</a></div></body></html>"
+        },
+        "propertyNames": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>The value of &quot;propertyNames&quot; MUST be a valid JSON Schema.\n\nIf the instance is an object, this keyword validates if every property name in the instance validates against the provided schema. Note the property name that the schema is testing will always be a string.\n\nOmitting this keyword has the same behavior as an empty schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3.2.5\">JSON Schema Specification</a></div></body></html>"
+        },
+        "if": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>This keyword's value MUST be a valid JSON Schema.\n\nThis validation outcome of this keyword's subschema has no direct effect on the overall validation result. Rather, it controls which of the &quot;then&quot; or &quot;else&quot; keywords are evaluated.\n\nInstances that successfully validate against this keyword's subschema MUST also be valid against the subschema value of the &quot;then&quot; keyword, if present.\n\nInstances that fail to validate against this keyword's subschema MUST also be valid against the subschema value of the &quot;else&quot; keyword, if present.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.2.1\">JSON Schema Specification</a></div></body></html>"
+        },
+        "then": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>This keyword's value MUST be a valid JSON Schema.\n\nWhen &quot;if&quot; is present, and the instance successfully validates against its subschema, then validation succeeds against this keyword if the instance also successfully validates against this keyword's subschema.\n\nThis keyword has no effect when &quot;if&quot; is absent, or when the instance fails to validate against its subschema. Implementations MUST NOT evaluate the instance against this keyword, for either validation or annotation collection purposes, in such cases.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.2.2\">JSON Schema Specification</a></div></body></html>"
+        },
+        "else": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>This keyword's value MUST be a valid JSON Schema.\n\nWhen &quot;if&quot; is present, and the instance fails to validate against its subschema, then validation succeeds against this keyword if the instance successfully validates against this keyword's subschema.\n\nThis keyword has no effect when &quot;if&quot; is absent, or when the instance successfully validates against its subschema. Implementations MUST NOT evaluate the instance against this keyword, for either validation or annotation collection purposes, in such cases.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.2.3\">JSON Schema Specification</a></div></body></html>"
+        },
+        "allOf": {
+            "$ref": "#/$defs/schemaArray",
+            "description": "<html><body><div>This keyword's value MUST be a non-empty array. Each item of the array MUST be a valid JSON Schema.\n\nAn instance validates successfully against this keyword if it validates successfully against all schemas defined by this keyword's value.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#allOf\">JSON Schema Specification</a></div></body></html>"
+        },
+        "anyOf": {
+            "$ref": "#/$defs/schemaArray",
+            "description": "<html><body><div>This keyword's value MUST be a non-empty array. Each item of the array MUST be a valid JSON Schema.\n\nAn instance validates successfully against this keyword if it validates successfully against at least one schema defined by this keyword's value. Note that when annotations are being collected, all subschemas MUST be examined so that annotations are collected from each subschema that validates successfully.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.1.2\">JSON Schema Specification</a></div></body></html>"
+        },
+        "oneOf": {
+            "$ref": "#/$defs/schemaArray",
+            "description": "<html><body><div>This keyword's value MUST be a non-empty array. Each item of the array MUST be a valid JSON Schema.\n\nAn instance validates successfully against this keyword if it validates successfully against exactly one schema defined by this keyword's value.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.1.3\">JSON Schema Specification</a></div></body></html>"
+        },
+        "not": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>This keyword's value MUST be a valid JSON Schema.\n\nAn instance is valid against this keyword if it fails to validate successfully against the schema defined by this keyword.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.2.1.4\">JSON Schema Specification</a></div></body></html>"
+        }
+    },
+    "$defs": {
+        "schemaArray": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "https://json-schema.org/draft/2019-09/schema"}
+        }
+    }
+}

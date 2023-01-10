@@ -1,0 +1,66 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$vocabulary": {"https://json-schema.org/draft/2020-12/vocab/core": true},
+    "title": "Core vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "$id": {
+            "$ref": "#/$defs/iriReferenceString",
+            "$comment": "Non-empty fragments not allowed.",
+            "pattern": "^[^#]*#?$",
+            "description": "<html><body><div>The &quot;$id&quot; keyword identifies a schema resource with its canonical [RFC6596] URI.\n\nNote that this URI is an identifier and not necessarily a network locator. In the case of a network-addressable URL, a schema need not be downloadable from its canonical URI.\n\nIf present, the value for this keyword MUST be a string, and MUST represent a valid URI-reference [RFC3986]. This URI-reference SHOULD be normalized, and MUST resolve to an absolute-URI [RFC3986] (without a fragment), or to a URI with an empty fragment.\n\nThe empty fragment form is NOT RECOMMENDED and is retained only for backwards compatibility, and because the application/schema+json media type defines that a URI with an empty fragment identifies the same resource as the same URI with the fragment removed. However, since this equivalence is not part of the RFC 3986 normalization process [RFC3986], implementers and schema authors cannot rely on generic URI libraries understanding it.\n\nTherefore, &quot;$id&quot; MUST NOT contain a non-empty fragment, and SHOULD NOT contain an empty fragment. The absolute-URI form MUST be considered the canonical URI, regardless of the presence or absence of an empty fragment. An empty fragment is currently allowed because older meta-schemas have an empty fragment in their $id (or previously, id). A future draft may outright forbid even empty fragments in &quot;$id&quot;. <br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-the-id-keyword\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$schema": {
+            "$ref": "#/$defs/iriString",
+            "description": "<html><body><div>The &quot;$schema&quot; keyword is both used as a JSON Schema dialect identifier and as the identifier of a resource which is itself a JSON Schema, which describes the set of valid schemas written for this particular dialect.\n\nThe value of this keyword MUST be a URI [RFC3986] (containing a scheme) and this URI MUST be normalized. The current schema MUST be valid against the meta-schema identified by this URI.\n\nIf this URI identifies a retrievable resource, that resource SHOULD be of media type &quot;application/schema+json&quot;.\n\nThe &quot;$schema&quot; keyword SHOULD be used in the document root schema object, and MAY be used in the root schema objects of embedded schema resources. It MUST NOT appear in non-resource root schema objects. If absent from the document root schema, the resulting behavior is implementation-defined.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-the-schema-keyword\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$ref": {
+            "$ref": "#/$defs/iriReferenceString",
+            "description": "<html><body><div>The &quot;$ref&quot; keyword is an applicator that is used to reference a statically identified schema. Its results are the results of the referenced schema. Note that this definition of how the results are determined means that other keywords can appear alongside of &quot;$ref&quot; in the same schema object. \n\nThe value of the &quot;$ref&quot; keyword MUST be a string which is a URI-Reference. Resolved against the current URI base, it produces the URI of the schema to apply. This resolution is safe to perform on schema load, as the process of evaluating an instance cannot change how the reference resolves.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-direct-references-with-ref\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$anchor": {
+            "$ref": "#/$defs/anchorString",
+            "description": "<html><body><div><br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$dynamicRef": {
+            "$ref": "#/$defs/iriReferenceString",
+            "description": "<html><body><div>The &quot;$dynamicRef&quot; keyword is an applicator that allows for deferring the full resolution until runtime, at which point it is resolved each time it is encountered while evaluating an instance.\n\nTogether with &quot;$dynamicAnchor&quot;, &quot;$dynamicRef&quot; implements a cooperative extension mechanism that is primarily useful with recursive schemas (schemas that reference themselves). Both the extension point and the runtime-determined extension target are defined with &quot;$dynamicAnchor&quot;, and only exhibit runtime dynamic behavior when referenced with &quot;$dynamicRef&quot;.\n\nThe value of the &quot;$dynamicRef&quot; property MUST be a string which is a URI-Reference. Resolved against the current URI base, it produces the URI used as the starting point for runtime resolution. This initial resolution is safe to perform on schema load.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-dynamic-references-with-dyn\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$dynamicAnchor": {
+            "$ref": "#/$defs/anchorString",
+            "description": "<html><body><div><br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$vocabulary": {
+            "type": "object",
+            "propertyNames": {"$ref": "#/$defs/iriString"},
+            "additionalProperties": {"type": "boolean"},
+            "description": "<html><body><div>The &quot;$vocabulary&quot; keyword is used in meta-schemas to identify the vocabularies available for use in schemas described by that meta-schema. It is also used to indicate whether each vocabulary is required or optional, in the sense that an implementation MUST understand the required vocabularies in order to successfully process the schema. Together, this information forms a dialect. Any vocabulary that is understood by the implementation MUST be processed in a manner consistent with the semantic definitions contained within the vocabulary.\n\nThe value of this keyword MUST be an object. The property names in the object MUST be URIs (containing a scheme) and this URI MUST be normalized. Each URI that appears as a property name identifies a specific set of keywords and their semantics.\n\nThe URI MAY be a URL, but the nature of the retrievable resource is currently undefined, and reserved for future use. Vocabulary authors MAY use the URL of the vocabulary specification, in a human-readable media type such as text/html or text/plain, as the vocabulary URI. Vocabulary documents may be added in forthcoming drafts. For now, identifying the keyword set is deemed sufficient as that, along with meta-schema validation, is how the current &quot;vocabularies&quot; work today. Any future vocabulary document format will be specified as a JSON document, so using text/html or other non-JSON formats in the meantime will not produce any future ambiguity. \n\nThe values of the object properties MUST be booleans. If the value is true, then implementations that do not recognize the vocabulary MUST refuse to process any schemas that declare this meta-schema with &quot;$schema&quot;. If the value is false, implementations that do not recognize the vocabulary SHOULD proceed with processing such schemas. The value has no impact if the implementation understands the vocabulary.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-the-vocabulary-keyword\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$comment": {
+            "type": "string",
+            "description": "<html><body><div>This keyword reserves a location for comments from schema authors to readers or maintainers of the schema.\n\nThe value of this keyword MUST be a string. Implementations MUST NOT present this string to end users. Tools for editing schemas SHOULD support displaying and editing this keyword. The value of this keyword MAY be used in debug or error output which is intended for developers making use of schemas.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-comments-with-comment\">JSON Schema Specification</a></div></body></html>"
+        },
+        "$defs": {
+            "type": "object",
+            "additionalProperties": {"$ref": "https://json-schema.org/draft/2020-12/schema#"},
+            "description": "<html><body><div>The &quot;$defs&quot; keyword reserves a location for schema authors to inline re-usable JSON Schemas into a more general schema. The keyword does not directly affect the validation result.\n\nThis keyword's value MUST be an object. Each member value of this object MUST be a valid JSON Schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-core.html#name-schema-re-use-with-defs\">JSON Schema Specification</a></div></body></html>"
+        }
+    },
+    "$defs": {
+        "anchorString": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][-A-Za-z0-9._]*$"
+        },
+        "iriString": {
+            "type": "string",
+            "format": "iri"
+        },
+        "iriReferenceString": {
+            "type": "string",
+            "format": "iri-reference"
+        }
+    }
+}

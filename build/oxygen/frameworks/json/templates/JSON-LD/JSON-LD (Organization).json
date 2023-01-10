@@ -1,0 +1,31 @@
+{
+    "@context": "http://schema.org",
+    "@id": "#creator",
+    "@type": "Organization",
+    "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US",
+        "addressRegion": "NY",
+        "postalCode": "14580"
+    },
+    "alternateName": "org",
+    "description": "Here comes the description.",
+    "email": "organization@mail.com",
+    "founder": "John Doe",
+    "foundingDate": "2020-01-01",
+    "foundingLocation": "NY",
+    "image": {
+        "@type": "ImageObject",
+        "height": "1024",
+        "width": "1024",
+        "url": "www.example.com/image.png"
+    },
+    "logo": {
+        "@type": "ImageObject",
+        "height": "60",
+        "width": "600",
+        "url": "www.example.com/logo.png"
+    },
+    "name": "org",
+    "url": "www.example.com"
+}

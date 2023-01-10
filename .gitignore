@@ -2,3 +2,11 @@
 /build/oxygen.tar.gz
 /validationReport.html
 /.idea/
+/build/oxygen/frameworks/dita/
+/build/oxygen/frameworks/tei/
+/build/oxygen/frameworks/jats/
+/build/oxygen/frameworks/xhtml/
+/build/oxygen/frameworks/xspec/
+/build/oxygen/frameworks/svg/
+/build/oxygen/frameworks/docbook/
+/build/oxygen/frameworks/mathml/

@@ -1,0 +1,40 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$vocabulary": {
+        "https://json-schema.org/draft/2019-09/vocab/core": true,
+        "https://json-schema.org/draft/2019-09/vocab/applicator": true,
+        "https://json-schema.org/draft/2019-09/vocab/validation": true,
+        "https://json-schema.org/draft/2019-09/vocab/meta-data": true,
+        "https://json-schema.org/draft/2019-09/vocab/format": false,
+        "https://json-schema.org/draft/2019-09/vocab/content": true
+    },
+
+    "title": "Core and Validation specifications meta-schema",
+    "allOf": [
+        {"$ref": "meta/core.json"},
+        {"$ref": "meta/applicator.json"},
+        {"$ref": "meta/validation.json"},
+        {"$ref": "meta/meta-data.json"},
+        {"$ref": "meta/format.json"},
+        {"$ref": "meta/content.json"}
+    ],
+    "type": ["object", "boolean"],
+    "properties": {
+        "definitions": {
+            "description": "While no longer an official keyword as it is replaced by $defs, this keyword is retained in the meta-schema to prevent incompatible extensions as it remains in common use.",
+            "type": "object",
+            "additionalProperties": { "$ref": "#" },
+            "default": {}
+        },
+        "dependencies": {
+            "description": "\"dependencies\" is no longer a keyword, but schema authors should avoid redefining it to facilitate a smooth transition to \"dependentSchemas\" and \"dependentRequired\"",
+            "type": "object",
+            "additionalProperties": {
+                "anyOf": [
+                    { "$ref": "#" },
+                    { "$ref": "meta/validation.json#/$defs/stringArray" }
+                ]
+            }
+        }
+    }
+}

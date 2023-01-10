@@ -1,0 +1,24 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://json-schema.org/draft/2019-09/meta/content",
+    "$vocabulary": {"https://json-schema.org/draft/2019-09/vocab/content": true},
+    "title": "Content vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "contentMediaType": {
+            "type": "string",
+            "description": "<html><body><div>If the instance is a string, this property indicates the media type of the contents of the string. If &quot;contentEncoding&quot; is present, this property describes the decoded string.\n\nThe value of this property MUST be a string, which MUST be a media type, as defined by RFC 2046.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.8.4\">JSON Schema Specification</a></div></body></html>"
+        },
+        "contentEncoding": {
+            "type": "string",
+            "description": "<html><body><div>If the instance value is a string, this property defines that the string SHOULD be interpreted as binary data and decoded using the encoding named by this property.\n\nPossible values for this property are listed in RFC 2045, Sec 6.1 and RFC 4648. For &quot;base64&quot;, which is defined in both RFCs, the definition in RFC 4648, which removes line length limitations, SHOULD be used, as various other specifications have mandated different lengths. Note that line lengths within a string can be constrained using the &quot;pattern&quot; keyword.\n\nIf this keyword is absent, but &quot;contentMediaType&quot; is present, this indicates that the media type could be encoded into UTF-8 like any other JSON string value, and does not require additional decoding.\n\nThe value of this property MUST be a string.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.8.3\">JSON Schema Specification</a></div></body></html>"
+        },
+        "contentSchema": {
+            "$ref": "https://json-schema.org/draft/2019-09/schema",
+            "description": "<html><body><div>If the instance is a string, and if &quot;contentMediaType&quot; is present, this property contains a schema which describes the structure of the string.\n\nThis keyword MAY be used with any media type that can be mapped into JSON Schema's data model.\n\nThe value of this property SHOULD be ignored if &quot;contentMediaType&quot; is not present.<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.8.5\">JSON Schema Specification</a></div></body></html>"
+        }
+    }
+}

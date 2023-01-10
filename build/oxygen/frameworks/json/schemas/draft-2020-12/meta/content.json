@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$vocabulary": {"https://json-schema.org/draft/2020-12/vocab/content": true},
+    "title": "Content vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "contentEncoding": {
+            "type": "string",
+            "description": "<html><body><div>If the instance value is a string, this property defines that the string SHOULD be interpreted as encoded binary data and decoded using the encoding named by this property.\n\nPossible values indicating base 16, 32, and 64 encodings with several variations are listed in RFC 4648 [RFC4648]. Additionally, sections 6.7 and 6.8 of RFC 2045 [RFC2045] provide encodings used in MIME. This keyword is derived from MIME's Content-Transfer-Encoding header, which was designed to map binary data into ASCII characters. It is not related to HTTP's Content-Encoding header, which is used to encode (e.g. compress or encrypt) the content of HTTP request and responses.\n\nAs &quot;base64&quot; is defined in both RFCs, the definition from RFC 4648 SHOULD be assumed unless the string is specifically intended for use in a MIME context. Note that all of these encodings result in strings consisting only of 7-bit ASCII characters. Therefore, this keyword has no meaning for strings containing characters outside of that range.\n\nIf this keyword is absent, but &quot;contentMediaType&quot; is present, this indicates that the encoding is the identity encoding, meaning that no transformation was needed in order to represent the content in a UTF-8 string.\n\nThe value of this property MUST be a string.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-contentencoding\">JSON Schema Specification</a></div></body></html>"
+        },
+        "contentMediaType": {
+            "type": "string",
+            "description": "<html><body><div>If the instance is a string, this property indicates the media type of the contents of the string. If &quot;contentEncoding&quot; is present, this property describes the decoded string.\n\nThe value of this property MUST be a string, which MUST be a media type, as defined by RFC 2046 [RFC2046].<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-contentmediatype\">JSON Schema Specification</a></div></body></html>"
+        },
+        "contentSchema": {
+            "$ref": "https://json-schema.org/draft/2020-12/schema",
+            "description": "<html><body><div>If the instance is a string, and if &quot;contentMediaType&quot; is present, this property contains a schema which describes the structure of the string.\n\nThis keyword MAY be used with any media type that can be mapped into JSON Schema's data model.\n\nThe value of this property MUST be a valid JSON schema. It SHOULD be ignored if &quot;contentMediaType&quot; is not present.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-contentschema\">JSON Schema Specification</a></div></body></html>"
+        }
+    }
+}

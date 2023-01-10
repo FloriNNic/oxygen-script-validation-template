@@ -1,0 +1,16 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://json-schema.org/draft/2020-12/meta/format-assertion",
+    "$vocabulary": {"https://json-schema.org/draft/2020-12/vocab/format-assertion": true},
+    "title": "Format vocabulary meta-schema for assertion results",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "format": {
+            "type": "string",
+            "description": "<html><body><div><br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-format-assertion-vocabulary\">JSON Schema Specification</a></div></body></html>"
+        }
+    }
+}

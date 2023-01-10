@@ -1,0 +1,19 @@
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "author": {"@id": "#identity"},
+    "copyrightHolder": {"@id": "#identity"},
+    "copyrightYear": "2022",
+    "creator": {"@id": "#creator"},
+    "description": "Here comes the description",
+    "headline": "Implementing JSON-LD Structured Data",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.example.com/image.jpg"
+    },
+    "inLanguage": "en",
+    "mainEntityOfPage": "www.example.com",
+    "name": "Implementing JSON-LD Structured Data",
+    "publisher": {"@id": "#creator"},
+    "url": "www.example.com"
+}

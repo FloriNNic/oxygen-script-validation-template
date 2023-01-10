@@ -1,0 +1,38 @@
+{
+    "openapiLocation": "path/to/openapi/document",
+    "server": {
+        "url": "{protocol}://example.com/api/v1",
+        "variables": [
+            {
+                "name": "protocol",
+                "value": "https"
+            }
+        ]
+    },
+    "testA0": {
+        "path": "/users/{username}",
+        "operation": "GET",
+        "parameters": [
+            {
+                "name": "name",
+                "value": "John Doe"
+            },
+            {
+                "name": "with_email",
+                "value": true
+            }
+        ],
+        "authorization": {
+            "httpBasic": [
+                {
+                    "username": "username",
+                    "password": "password"
+                }
+            ]
+        },
+        "expectedResponse": {
+            "status": "HTTP/1.1 200 OK",
+            "responseText": "the expected response"
+        }
+    }
+}

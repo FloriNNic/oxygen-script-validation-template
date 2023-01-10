@@ -1,0 +1,41 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://json-schema.org/draft/2020-12/meta/meta-data",
+    "$vocabulary": {"https://json-schema.org/draft/2020-12/vocab/meta-data": true},
+    "title": "Meta-data vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "<html><body><div>The value of &quot;title&quot; and &quot;description&quot; keywords MUST be a string.\n\nBoth of these keywords can be used to decorate a user interface with information about the data produced by this user interface. A title will preferably be short, whereas a description will provide explanation about the purpose of the instance described by this schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-title-and-description\">JSON Schema Specification</a></div></body></html>"
+        },
+        "description": {
+            "type": "string",
+            "description": "<html><body><div>The value of &quot;title&quot; and &quot;description&quot; keywords MUST be a string.\n\nBoth of these keywords can be used to decorate a user interface with information about the data produced by this user interface. A title will preferably be short, whereas a description will provide explanation about the purpose of the instance described by this schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-title-and-description\">JSON Schema Specification</a></div></body></html>"
+        },
+        "default": true,
+        "deprecated": {
+            "type": "boolean",
+            "default": false,
+            "description": "<html><body><div>The value of this keyword MUST be a boolean. When multiple occurrences of this keyword are applicable to a single sub-instance, applications SHOULD consider the instance location to be deprecated if any occurrence specifies a true value.\n\nIf &quot;deprecated&quot; has a value of boolean true, it indicates that applications SHOULD refrain from usage of the declared property. It MAY mean the property is going to be removed in the future.\n\nA root schema containing &quot;deprecated&quot; with a value of true indicates that the entire resource being described MAY be removed in the future.\n\nThe &quot;deprecated&quot; keyword applies to each instance location to which the schema object containing the keyword successfully applies. This can result in scenarios where every array item or object property is deprecated even though the containing array or object is not.\n\nOmitting this keyword has the same behavior as a value of false.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-deprecated\">JSON Schema Specification</a></div></body></html>"
+        },
+        "readOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "<html><body><div>The value of &quot;readOnly&quot; and &quot;writeOnly&quot; keywords MUST be a boolean. When multiple occurrences of these keywords are applicable to a single sub-instance, the resulting behavior SHOULD be as for a true value if any occurrence specifies a true value, and SHOULD be as for a false value otherwise.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-readonly-and-writeonly\">JSON Schema Specification</a></div></body></html>"
+        },
+        "writeOnly": {
+            "type": "boolean",
+            "default": false,
+            "description": "<html><body><div>The value of &quot;readOnly&quot; and &quot;writeOnly&quot; keywords MUST be a boolean. When multiple occurrences of these keywords are applicable to a single sub-instance, the resulting behavior SHOULD be as for a true value if any occurrence specifies a true value, and SHOULD be as for a false value otherwise.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-readonly-and-writeonly\">JSON Schema Specification</a></div></body></html>"
+        },
+        "examples": {
+            "type": "array",
+            "items": true,
+            "description": "<html><body><div>The value of this keyword MUST be an array. There are no restrictions placed on the values within the array. When multiple occurrences of this keyword are applicable to a single sub-instance, implementations MUST provide a flat array of all values rather than an array of arrays.\n\nThis keyword can be used to provide sample JSON values associated with a particular schema, for the purpose of illustrating usage. It is RECOMMENDED that these values be valid against the associated schema.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-examples\">JSON Schema Specification</a></div></body></html>"
+        }
+    }
+}

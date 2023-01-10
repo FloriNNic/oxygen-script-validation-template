@@ -1,0 +1,53 @@
+@namespace oxy "http://www.oxygenxml.com/extensions/author";
+
+JSON:before,
+JSON:after {
+    display: none;
+}
+JSON > * {
+    font-size: 1.5em;
+    margin: 1em;
+    font-weight: bold;
+    -oxy-foldable: false;
+}
+
+*:not(JSON):before {
+    content: oxy_capitalize(oxy_local-name()) ": ";
+}
+
+_X40_context {
+    display: inline-block;
+    color: rgb(0, 50, 250);
+}
+
+_X40_context > * {
+  color: black;
+  padding-top: 5px;
+}
+
+_X40_version:before {
+    content: "Version: ";
+}
+
+_X40_index:before {
+    content: "@index: ";
+}
+
+_X40_id {
+    link: oxy_xpath("text()");
+    color: rgb(0, 50, 250);
+    -oxy-foldable: false;
+}
+
+*:has(array),
+_X40_context {
+    border: 1px solid #c5c5c5;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    margin: 1em 0.25em 1em 0;
+    background-color: #fff8ef;
+}
+
+*:has(*) {
+    -oxy-foldable:true;
+}

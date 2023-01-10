@@ -1,0 +1,130 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://json-schema.org/draft/2020-12/meta/validation",
+    "$vocabulary": {"https://json-schema.org/draft/2020-12/vocab/validation": true},
+    "title": "Validation vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "type": {
+            "anyOf": [
+                {"$ref": "#/$defs/simpleTypes"},
+                {
+                    "type": "array",
+                    "items": {"$ref": "#/$defs/simpleTypes"},
+                    "minItems": 1,
+                    "uniqueItems": true
+                }
+            ],
+            "description": "<html><body><div>The value of this keyword MUST be either a string or an array. If it is an array, elements of the array MUST be strings and MUST be unique.\n\nString values MUST be one of the six primitive types (&quot;null&quot;, &quot;boolean&quot;, &quot;object&quot;, &quot;array&quot;, &quot;number&quot;, or &quot;string&quot;), or &quot;integer&quot; which matches any number with a zero fractional part.\n\nIf the value of &quot;type&quot; is a string, then an instance validates successfully if its type matches the type represented by the value of the string. If the value of &quot;type&quot; is an array, then an instance validates successfully if its type matches any of the types indicated by the strings in the array.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-type\">JSON Schema Specification</a></div></body></html>"
+        },
+        "const": true,
+        "enum": {
+            "type": "array",
+            "items": true,
+            "description": "<html><body><div>The value of this keyword MUST be an array. This array SHOULD have at least one element. Elements in the array SHOULD be unique.\n\nAn instance validates successfully against this keyword if its value is equal to one of the elements in this keyword's array value.\n\nElements in the array might be of any type, including null.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-enum\">JSON Schema Specification</a></div></body></html>"
+        },
+        "multipleOf": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "<html><body><div>The value of &quot;multipleOf&quot; MUST be a number, strictly greater than 0.\n\nA numeric instance is valid only if division by this keyword's value results in an integer.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-multipleof\">JSON Schema Specification</a></div></body></html>"
+        },
+        "maximum": {
+            "type": "number",
+            "description": "<html><body><div>The value of &quot;maximum&quot; MUST be a number, representing an inclusive upper limit for a numeric instance.\n\nIf the instance is a number, then this keyword validates only if the instance is less than or exactly equal to &quot;maximum&quot;.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-maximum\">JSON Schema Specification</a></div></body></html>"
+        },
+        "exclusiveMaximum": {
+            "type": "number",
+            "description": "<html><body><div>The value of &quot;exclusiveMaximum&quot; MUST be a number, representing an exclusive upper limit for a numeric instance.\n\nIf the instance is a number, then the instance is valid only if it has a value strictly less than (not equal to) &quot;exclusiveMaximum&quot;.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-exclusivemaximum\">JSON Schema Specification</a></div></body></html>"
+        },
+        "minimum": {
+            "type": "number",
+            "description": "<html><body><div>The value of &quot;minimum&quot; MUST be a number, representing an inclusive lower limit for a numeric instance.\n\nIf the instance is a number, then this keyword validates only if the instance is greater than or exactly equal to &quot;minimum&quot;.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-minimum\">JSON Schema Specification</a></div></body></html>"
+        },
+        "exclusiveMinimum": {
+            "type": "number",
+            "description": "<html><body><div>The value of &quot;exclusiveMinimum&quot; MUST be a number, representing an exclusive lower limit for a numeric instance.\n\nIf the instance is a number, then the instance is valid only if it has a value strictly greater than (not equal to) &quot;exclusiveMinimum&quot;.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-exclusiveminimum\">JSON Schema Specification</a></div></body></html>"
+        },
+        "maxLength": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nA string instance is valid against this keyword if its length is less than, or equal to, the value of this keyword.\n\nThe length of a string instance is defined as the number of its characters as defined by RFC 8259 [RFC8259].<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-maxlength\">JSON Schema Specification</a></div></body></html>"
+        },
+        "minLength": {
+            "$ref": "#/$defs/nonNegativeIntegerDefault0",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nA string instance is valid against this keyword if its length is greater than, or equal to, the value of this keyword.\n\nThe length of a string instance is defined as the number of its characters as defined by RFC 8259 [RFC8259].\n\nOmitting this keyword has the same behavior as a value of 0.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-minlength\">JSON Schema Specification</a></div></body></html>"
+        },
+        "pattern": {
+            "type": "string",
+            "format": "regex",
+            "description": "<html><body><div>The value of this keyword MUST be a string. This string SHOULD be a valid regular expression, according to the ECMA-262 regular expression dialect.\n\nA string instance is considered valid if the regular expression matches the instance successfully. Recall: regular expressions are not implicitly anchored.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-pattern\">JSON Schema Specification</a></div></body></html>"
+        },
+        "maxItems": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nAn array instance is valid against &quot;maxItems&quot; if its size is less than, or equal to, the value of this keyword.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-maxitems\">JSON Schema Specification</a></div></body></html>"
+        },
+        "minItems": {
+            "$ref": "#/$defs/nonNegativeIntegerDefault0",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nAn array instance is valid against &quot;minItems&quot; if its size is greater than, or equal to, the value of this keyword.\n\nOmitting this keyword has the same behavior as a value of 0.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-minitems\">JSON Schema Specification</a></div></body></html>"
+        },
+        "uniqueItems": {
+            "type": "boolean",
+            "default": false,
+            "description": "<html><body><div>The value of this keyword MUST be a boolean.\n\nIf this keyword has boolean value false, the instance validates successfully. If it has boolean value true, the instance validates successfully if all of its elements are unique.\n\nOmitting this keyword has the same behavior as a value of false.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-uniqueitems\">JSON Schema Specification</a></div></body></html>"
+        },
+        "maxContains": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nIf &quot;contains&quot; is not present within the same schema object, then this keyword has no effect.\n\nAn instance array is valid against &quot;maxContains&quot; in two ways, depending on the form of the annotation result of an adjacent &quot;contains&quot; keyword. The first way is if the annotation result is an array and the length of that array is less than or equal to the &quot;maxContains&quot; value. The second way is if the annotation result is a boolean &quot;true&quot; and the instance array length is less than or equal to the &quot;maxContains&quot; value.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-maxcontains\">JSON Schema Specification</a></div></body></html>"
+        },
+        "minContains": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "default": 1,
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nIf &quot;contains&quot; is not present within the same schema object, then this keyword has no effect.\n\nAn instance array is valid against &quot;minContains&quot; in two ways, depending on the form of the annotation result of an adjacent &quot;contains&quot; keyword. The first way is if the annotation result is an array and the length of that array is greater than or equal to the &quot;minContains&quot; value. The second way is if the annotation result is a boolean &quot;true&quot; and the instance array length is greater than or equal to the &quot;minContains&quot; value.\n\nA value of 0 is allowed, but is only useful for setting a range of occurrences from 0 to the value of &quot;maxContains&quot;. A value of 0 causes &quot;minContains&quot; and &quot;contains&quot; to always pass validation (but validation can still fail against a &quot;maxContains&quot; keyword).\n\nOmitting this keyword has the same behavior as a value of 1.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-mincontains\">JSON Schema Specification</a></div></body></html>"
+        },
+        "maxProperties": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nAn object instance is valid against &quot;maxProperties&quot; if its number of properties is less than, or equal to, the value of this keyword.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-maxproperties\">JSON Schema Specification</a></div></body></html>"
+        },
+        "minProperties": {
+            "$ref": "#/$defs/nonNegativeIntegerDefault0",
+            "description": "<html><body><div>The value of this keyword MUST be a non-negative integer.\n\nAn object instance is valid against &quot;minProperties&quot; if its number of properties is greater than, or equal to, the value of this keyword.\n\nOmitting this keyword has the same behavior as a value of 0.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-minproperties\">JSON Schema Specification</a></div></body></html>"
+        },
+        "required": {
+            "$ref": "#/$defs/stringArray",
+            "description": "<html><body><div>The value of this keyword MUST be an array. Elements of this array, if any, MUST be strings, and MUST be unique.\n\nAn object instance is valid against this keyword if every item in the array is the name of a property in the instance.\n\nOmitting this keyword has the same behavior as an empty array.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-required\">JSON Schema Specification</a></div></body></html>"
+        },
+        "dependentRequired": {
+            "type": "object",
+            "additionalProperties": {"$ref": "#/$defs/stringArray"},
+            "description": "<html><body><div>The value of this keyword MUST be an object. Properties in this object, if any, MUST be arrays. Elements in each array, if any, MUST be strings, and MUST be unique.\n\nThis keyword specifies properties that are required if a specific other property is present. Their requirement is dependent on the presence of the other property.\n\nValidation succeeds if, for each name that appears in both the instance and as a name within this keyword's value, every item in the corresponding array is also the name of a property in the instance.\n\nOmitting this keyword has the same behavior as an empty object.<br/><br/>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dependentrequired\">JSON Schema Specification</a></div></body></html>"
+        }
+    },
+    "$defs": {
+        "nonNegativeInteger": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "nonNegativeIntegerDefault0": {
+            "$ref": "#/$defs/nonNegativeInteger",
+            "default": 0
+        },
+        "simpleTypes": {
+            "enum": [
+                "array",
+                "boolean",
+                "integer",
+                "null",
+                "number",
+                "object",
+                "string"
+            ]
+        },
+        "stringArray": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true,
+            "default": []
+        }
+    }
+}

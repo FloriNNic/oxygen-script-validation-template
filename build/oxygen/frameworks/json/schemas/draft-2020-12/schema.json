@@ -1,0 +1,60 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$vocabulary": {
+        "https://json-schema.org/draft/next/vocab/core": true,
+        "https://json-schema.org/draft/next/vocab/applicator": true,
+        "https://json-schema.org/draft/next/vocab/unevaluated": true,
+        "https://json-schema.org/draft/next/vocab/validation": true,
+        "https://json-schema.org/draft/next/vocab/meta-data": true,
+        "https://json-schema.org/draft/next/vocab/format-annotation": true,
+        "https://json-schema.org/draft/next/vocab/content": true
+    },
+    "title": "Core and Validation specifications meta-schema",
+    "description": "<html><body><div>See <a href=\"https://json-schema.org/draft/2020-12/json-schema-validation.html\">JSON Schema Specification</a></div></body></html>",
+    "allOf": [
+        {"$ref": "meta/core.json"},
+        {"$ref": "meta/applicator.json"},
+        {"$ref": "meta/unevaluated.json"},
+        {"$ref": "meta/validation.json"},
+        {"$ref": "meta/meta-data.json"},
+        {"$ref": "meta/format-annotation.json"},
+        {"$ref": "meta/content.json"}
+    ],
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "$comment": "This meta-schema also defines keywords that have appeared in previous drafts in order to prevent incompatible extensions as they remain in common use.",
+    "properties": {
+        "definitions": {
+            "description": "\"definitions\" has been replaced by \"$defs\".",
+            "type": "object",
+            "additionalProperties": {"$ref": "#"},
+            "deprecated": true,
+            "default": {}
+        },
+        "dependencies": {
+            "description": "\"dependencies\" has been split and replaced by \"dependentSchemas\" and \"dependentRequired\" in order to serve their differing semantics.",
+            "type": "object",
+            "additionalProperties": {
+                "anyOf": [
+                    {"$ref": "#"},
+                    {"$ref": "meta/validation.json#/$defs/stringArray"}
+                ]
+            },
+            "deprecated": true,
+            "default": {}
+        },
+        "$recursiveAnchor": {
+            "description": "\"$recursiveAnchor\" has been replaced by \"$dynamicAnchor\".",
+            "$ref": "meta/core.json#/$defs/anchorString",
+            "deprecated": true
+        },
+        "$recursiveRef": {
+            "description": "\"$recursiveRef\" has been replaced by \"$dynamicRef\".",
+            "type": "string",
+            "format": "uri-reference",
+            "deprecated": true
+        }
+    }
+}

@@ -1,0 +1,74 @@
+---
+swagger: 2.0
+schemes:
+- http
+- https
+host: example.com
+basePath: /api/v1
+info:
+  description: This is an example API to demonstrate features of OpenAPI specification
+  version: 1.0.0
+  title: Example API
+  termsOfService: https://example.com/terms/
+  contact:
+    email: contact@example.com
+    url: http://example.com/contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+produces:
+- application/json
+consumes:
+- application/json
+tags:
+- name: User
+  description: Operations about user
+paths:
+  /users/{username}:
+    get:
+      tags:
+      - User
+      summary: Get user by user name
+      description: "Some description of the operation. \nYou can use `markdown` here.\n"
+      operationId: getUserByName
+      parameters:
+      - name: username
+        in: path
+        description: The name that needs to be fetched
+        required: true
+        type: string
+      - name: with_email
+        in: query
+        description: Filter users without email
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
+          examples:
+            application/json:
+              username: user1
+              email: user@example.com
+        "403":
+          description: Forbidden
+        "404":
+          description: User not found
+definitions:
+  Email:
+    description: User email address
+    type: string
+    format: email
+    example: john.smith@example.com
+  User:
+    type: object
+    properties:
+      username:
+        description: User supplied username
+        type: string
+        minLength: 4
+        example: John78
+      email:
+        $ref: '#/definitions/Email'

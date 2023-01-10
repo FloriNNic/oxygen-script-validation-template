@@ -1,0 +1,157 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Test scenario schema",
+    "description": "The schema contains a test scenario(the requests and the expected responses).",
+    "type": "object",
+    "properties": {
+        "openapiLocation": {
+            "description": "The uri of the openAPI file.",
+            "type": "string"
+        },
+        "server": {
+            "description": "The server to which the requests are sent.",
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "format": "url"
+                },
+                "variables": {
+                    "description": "The variables for the templated server.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"description": "The name of the variable."},
+                            "value": {"description": "The value of the variable."}
+                        }
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": ["url"]
+        }
+    },
+    "patternProperties": {
+        "^test[A-Z]+[a-zA-Z0-9]+$": {
+            "description": "The request that will be sent to the server.",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "The description of the test.",
+                    "type": "string"
+                },
+                "path": {
+                    "description": "The selected path.",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "The selected operation.",
+                    "type": "string",
+                    "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "OPTIONS",
+                        "HEAD"
+                    ]
+                },
+                "parameters": {
+                    "description": "The parameters for the request.",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {"description": "The name of the parameter."},
+                            "value": {"description": "The value of the parameter."}
+                        }
+                    }
+                },
+                "authorization": {
+                    "description": "The types of authentication.",
+                    "type": "object",
+                    "properties": {
+                        "apiKey": {
+                            "description": "The apiKey type.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {"type": "string"},
+                                    "value": {"type": "string"},
+                                    "in": {
+                                        "type": "string",
+                                        "enum": [
+                                            "query",
+                                            "header"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "httpBasic": {
+                            "description": "The http basic type.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {"type": "string"},
+                                    "password": {"type": "string"}
+                                }
+                            }
+                        },
+                        "httpBearer": {
+                            "description": "The http bearer type.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "token": {"type": "string"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "body": {
+                    "description": "The body of the request.",
+                    "type": "object",
+                    "properties": {
+                        "bodyType": {"type": "string"},
+                        "bodyContent": {"type": "string"}
+                    }
+                },
+                "expectedResponse": {
+                    "description": "The expected response.",
+                    "type": "object",
+                    "properties": {
+                        "status": {"type": "string"},
+                        "responseText": {"type": "string"}
+                    }
+                }
+            },
+            "if": {
+                "properties": {
+                    "operation": 
+                         {"const": "GET"}
+                    
+                }
+            },
+            "then": {
+                "properties": {"body": false}
+            },
+            "required": [
+                "path",
+                "operation",
+                "expectedResponse"
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "openapiLocation",
+        "server"
+    ],
+    "minProperties": 3
+}

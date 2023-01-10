@@ -1,0 +1,16 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://json-schema.org/draft/2019-09/meta/format",
+    "$vocabulary": {"https://json-schema.org/draft/2019-09/vocab/format": true},
+    "title": "Format vocabulary meta-schema",
+    "type": [
+        "object",
+        "boolean"
+    ],
+    "properties": {
+        "format": {
+            "type": "string",
+            "description": "<html><body><div>Structural validation alone may be insufficient to allow an application to correctly utilize certain values. The &quot;format&quot; annotation keyword is defined to allow schema authors to convey semantic information for a fixed subset of values which are accurately described by authoritative resources, be they RFCs or other external specifications.\n\nImplementations MAY treat &quot;format&quot; as an assertion in addition to an annotation, and attempt to validate the value's conformance to the specified semantics. See the Implementation Requirements below for details.\n\nThe value of this keyword is called a format attribute. It MUST be a string. A format attribute can generally only validate a given set of instance types. If the type of the instance to validate is not in this set, validation for this format attribute and instance SHOULD succeed. All format attributes defined in this section apply to strings, but a format attribute can be specified to apply to any instance types defined in the data model defined in the core JSON Schema. [CREF1]<br/><br/>See <a href=\"https://json-schema.org/draft/2019-09/json-schema-validation.html#format\">JSON Schema Specification</a></div></body></html>"
+        }
+    }
+}

@@ -1,0 +1,66 @@
+@namespace oxy "http://www.oxygenxml.com/extensions/author";
+
+JSON {
+    font-family:sans-serif;
+    font-size:0.9em;
+    display:block;
+    white-space:normal;
+}
+
+* {
+    display : block;
+    padding-left:1em;
+    white-space: pre-wrap;
+    font-weight: normal;
+}
+
+JSON:before {
+    content : '\{';
+}
+
+JSON:after {
+    content : '\}';
+}
+
+*:not(JSON):before {
+    content: oxy_local-name() ": ";
+}
+
+array:before {
+    content : '[' !important;
+}
+
+array:after {
+    content : ']';
+}
+
+*:before, *:after {
+    color : rgb(0,0,150); 
+}
+
+*:before {
+    content : oxy_link-text() ' : ';
+    /*  content : oxy_label(text, oxy_link-text(),
+                        width, 35%); */
+}
+
+oxy|entity:before {
+    content : '';
+}
+
+:root {
+ -oxy-foldable:false;   
+}
+*:has(*) {
+    -oxy-foldable:true;
+}
+
+@media oxygen-dark-theme, oxygen-high-contrast-black{
+    * {
+        color:white !important;
+    }
+    
+    *:before, *:after {
+        color:rgb(95,200,253) !important;
+    }
+}
