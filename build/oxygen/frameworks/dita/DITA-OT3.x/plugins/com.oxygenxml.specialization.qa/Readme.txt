@@ -1,1 +1,0 @@
-Specialization for qatopic (Questions and Answers Topic).
