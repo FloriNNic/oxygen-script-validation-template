@@ -25,6 +25,9 @@ jobs:
 #        - name: Gradle Wrapper Validation
 #          uses: gradle/wrapper-validation-action@v1
 
+        - name: Fetch Sources
+          uses: actions/checkout@v3
+
         - name: Setup Java
           uses: actions/setup-java@v3
           with:
@@ -34,9 +37,6 @@ jobs:
 
         - name: Setup Gradle
           uses: gradle/gradle-build-action@v2
-
-        - name: Fetch Sources
-          uses: actions/checkout@v3
 
         - name: Make gradlew executable
           run: chmod +x ./build/gradlew
