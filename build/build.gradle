@@ -1,6 +1,6 @@
 task initValidation() {
     doFirst {
-            String key = System.getenv('SCRIPTING_LICENSE_KEY')
+            key = System.getenv('SCRIPTING_LICENSE_KEY')
             if (key == null) {
                 throw new TaskExecutionException(it, new Exception("You need a valid Oxygen Scripting license key."))
             } else {
@@ -16,9 +16,8 @@ task initValidation() {
 }
 
 task runValidation(type: Exec, dependsOn: [initValidation]) {
-    inputValue = project.property('localBuild')
     // Compute the validation directory depending on where the script is started from.
-    String valDir = "${projectDir}" + (inputValue.toBoolean() ? "/../validation/" : "/../../") + validationDir
+    String valDir = "${projectDir}" + (localBuild.toBoolean() ? "/../validation/" : "/../../") + validationDir
     workingDir "${projectDir}/oxygen"
     commandLine "${projectDir}/oxygen/scripts/validate.sh",
             valDir,
