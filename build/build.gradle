@@ -19,20 +19,16 @@ task runValidation(type: Exec, dependsOn: [initValidation]) {
     // Compute the validation directory depending on where the script is started from.
     String valDir = "${projectDir}" + (localBuild.toBoolean() ? "/../validation/" : "/../../") + validationDir
     workingDir "${projectDir}/oxygen"
-    try {
         commandLine "${projectDir}/oxygen/scripts/validate.sh",
                 valDir,
                 "-sf", "${projectDir}/../validateScript.xpr",
                 "-rft", "html",
                 "-rf", "${projectDir}/../report/validationReport.html"
-    } catch (org.gradle.api.tasks.TaskExecutionException ex){
-        println "Directory/file not found: " + validationDir
-    }
 
     doLast {
         if (executionResult.get() != 0) {
+            println executionResult.get()
             println "Validation problems found. See the report for more details."
-            // throw new TaskExecutionException(it, new Exception("Validation failed, see task output for details."))
         }
             // Replace file locations from GitHub VM with locations from repository.
             ant.replace(
