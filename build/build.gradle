@@ -26,7 +26,7 @@ task runValidation(type: Exec, dependsOn: [initValidation]) {
             "-rf", "${projectDir}/../report/validationReport.html"
 
     doLast {
-        if (execResult.getExitValue() != 0) {
+        if (executionResult.get() != 0) {
             println new File("${projectDir}/../report/validationReport.html").text
             throw new TaskExecutionException(it, new Exception("Validation failed, see task output for details."))
         } else {
