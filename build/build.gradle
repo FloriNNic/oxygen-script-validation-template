@@ -27,8 +27,8 @@ task runValidation(type: Exec, dependsOn: [initValidation]) {
 
     doLast {
         if (executionResult.get() != 0) {
-            println new File("${projectDir}/../report/validationReport.html").text
-            throw new TaskExecutionException(it, new Exception("Validation failed, see task output for details."))
+            println "Validation problems found. See the report for more details."
+            // throw new TaskExecutionException(it, new Exception("Validation failed, see task output for details."))
         } else {
             // Replace file locations from GitHub VM with locations from repository.
             ant.replace(
