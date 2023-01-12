@@ -41,7 +41,7 @@ jobs:
         - name: Build with Gradle
           env:
            SCRIPTING_LICENSE_KEY: ${{secrets.SCRIPTING_LICENSE_KEY}}
-          run: cd build; gradle init; ./gradlew runValidation -PvalidationDir=${{ github.event.inputs.validationDir }} -PlocalBuild=true --info --stacktrace
+          run: cd build; gradle init; ./gradlew runValidation -PvalidationDir=${{ inputs.validationDir }} -PlocalBuild=true --info --stacktrace --build-cache
        
         - name: Deploy
           uses: JamesIves/github-pages-deploy-action@v4.4.1
