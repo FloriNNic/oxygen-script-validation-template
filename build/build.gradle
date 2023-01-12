@@ -1,6 +1,6 @@
 task initValidation() {
     doFirst {
-            key = System.getenv('SCRIPTING_LICENSE_KEY')
+            String key = System.getenv('SCRIPTING_LICENSE_KEY')
             if (key == null) {
                 throw new TaskExecutionException(it, new Exception("You need a valid Oxygen Scripting license key."))
             } else {
