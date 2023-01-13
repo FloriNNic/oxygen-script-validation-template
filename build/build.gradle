@@ -27,7 +27,6 @@ task runValidation(type: Exec, dependsOn: [initValidation]) {
 
     doLast {
         if (executionResult.get() != 0) {
-            println executionResult.get()
             println "Validation problems found. See the report for more details."
         }
             // Replace file locations from GitHub VM with locations from repository.
